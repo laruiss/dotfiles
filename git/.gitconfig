@@ -17,3 +17,5 @@
 [help]
 	format = html
 	#browser = w3m
+[branch "master"]
+	rebase = preserve

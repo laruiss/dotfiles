@@ -8,3 +8,5 @@
 	ci = commit
 [push]
 	default = simple
+[status]
+	showUntrackedFiles = all

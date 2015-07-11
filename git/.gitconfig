@@ -6,6 +6,7 @@
 	co = checkout
 	br = branch
 	ci = commit
+	oops = commit --amend
 [push]
 	default = simple
 [status]

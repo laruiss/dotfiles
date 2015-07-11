@@ -4,7 +4,7 @@
 [alias]
 	st = status
 	co = checkout
-	br = branch
+	br = "branch -vv"
 	ci = commit
 	oops = commit --amend
 	sre = "!f() { git log -S$1 --pickaxe-regex ; }; f"

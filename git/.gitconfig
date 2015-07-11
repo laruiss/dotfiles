@@ -7,6 +7,7 @@
 	br = branch
 	ci = commit
 	oops = commit --amend
+	sre = "!f() { git log -S$1 --pickaxe-regex ; }; f"
 [push]
 	default = simple
 [status]

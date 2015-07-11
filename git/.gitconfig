@@ -14,3 +14,6 @@
 	showUntrackedFiles = all
 [diff]
 	wordRegex = .
+[help]
+	format = html
+	#browser = w3m

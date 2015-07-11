@@ -1,0 +1,10 @@
+[user]
+	email = laruiss@gmail.com
+	name = Stanislas Ormières
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+[push]
+	default = simple

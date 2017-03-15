@@ -2,20 +2,39 @@
 	email = laruiss@gmail.com
 	name = Stanislas Ormières
 [alias]
-	st = status
-	co = checkout
-	br = "branch -vv"
+	ap = add -p
+	br = branch
+	bv = "br -vv"
 	ci = commit
+	co = checkout
+	cm = commit -m
+	df = diff
+	ds = diff --staged
+	h = log --format='%C(yellow)%h%Creset %C(red)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --graph
+	last = !git --no-pager log -1 -p --stat HEAD
+	lg = log --oneline --decorate --graph
 	oops = commit --amend
 	sre = "!f() { git log -S$1 --pickaxe-regex ; }; f"
+	st = status
+	unstage = reset HEAD
+	us = unstage
+	root = rev-parse --show-toplevel
 [push]
 	default = simple
 [status]
 	showUntrackedFiles = all
 [diff]
 	wordRegex = .
+	tool = meld
 [help]
 	format = html
 	#browser = w3m
-[branch "master"]
+[branch]
+	autosetuprebase = always
 	rebase = preserve
+[credential]
+	helper = cache --timeout=3600
+[color]
+	ui = true
+[rerere]
+	enabled = true

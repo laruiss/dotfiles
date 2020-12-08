@@ -1,10 +1,11 @@
 [user]
-	email = laruiss@gmail.com
+	email = stan@stormier.ninja
 	name = Stanislas Ormières
 [alias]
 	ap = add -p
 	br = branch
 	bv = "br -vv"
+	cb = "rev-parse --abbrev-ref HEAD" # *c*urrent *b*ranch
 	ci = commit
 	co = checkout
 	cm = commit -m
@@ -16,6 +17,8 @@
 	oops = commit --amend
 	sre = "!f() { git log -S$1 --pickaxe-regex ; }; f"
 	st = status
+	sw = switch
+	sc = "switch -c"
 	unstage = reset HEAD
 	us = unstage
 	root = rev-parse --show-toplevel
@@ -26,9 +29,6 @@
 [diff]
 	wordRegex = .
 	tool = meld
-[help]
-	format = html
-	#browser = w3m
 [branch]
 	autosetuprebase = always
 	rebase = preserve

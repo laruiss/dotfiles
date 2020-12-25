@@ -146,3 +146,4 @@ if test -n "${USE_P10K-}"; then
 fi
 
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+source ~/.zsh/completion/scalingo_complete.zsh

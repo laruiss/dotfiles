@@ -35,6 +35,9 @@
 [credential]
 	helper = cache --timeout=3600
 [color]
-	ui = true
+	ui = always
 [rerere]
 	enabled = true
+[core]
+  pager = less -Fr
+  

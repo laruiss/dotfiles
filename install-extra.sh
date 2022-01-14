@@ -1,10 +1,27 @@
 #!/bin/sh
 
 read -p "Install Cypress dependencies? [y/N] " CYPRESS_DEPS
-read -p "Install locales? [y/N] " LOCALES
-read -p "Install brew? [y/N] " BREW
 read -p "Install scalingo CLI? [y/N] " SCALINGO
-read -p "Install node? (Skip or type a version number) " NODE
+read -p "Install node? (Skip or type a major version number) " NODE
+read -p "Install nvm? [y/N] " NVM
+#read -p "Install brew? [y/N] " BREW
+
+
+if [ "$CYPRESS_DEPS" = 'y' ]
+then
+  echo "Installing Cypress dependencies"
+  sudo apt update
+  sudo apt upgrade
+  sudo apt -y install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+  echo "Installing dbus as service"
+  sudo /etc/init.d/dbus start &> /dev/null
+  echo "Giving sudo rights for current user to start dbus with sudo without passwd"
+  USER_HAS_RIGHT=$(sudo grep -q "$USER" /etc/sudoers.d/dbus)
+  if [ !$USER_HAS_RIGHT ]
+  then
+    echo "$USER ALL = (root) NOPASSWD: /etc/init.d/dbus"  | sudo tee -a /etc/sudoers.d/dbus
+  fi
+fi
 
 if [ "$SCALINGO" = 'y' ]
 then
@@ -22,6 +39,18 @@ then
   echo "Installing node " $NODE
   wget -qO- https://deb.nodesource.com/setup_${NODE}.x | sudo -E bash -
   sudo apt install -y nodejs
+fi
+
+if [ "$NVM" != '' ]
+then
+  echo "Installing nvm "
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  if [ "$BASH_OR_ZSH" != '' ]
+  then
+    source ~/.zshrc
+  else
+    source ~/.bashrc
+  fi
 fi
 
 if [ "$BREW" = 'y' ]
@@ -50,26 +79,4 @@ then
     echo "eval \$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >>~/.zshrc
   fi
 
-fi
-
-if [ "$LOCALES" = 'y' ]
-then
-  sudo locale-gen "fr_FR.UTF-8"
-  sudo dpkg-reconfigure locales
-fi
-
-if [ "$CYPRESS_DEPS" = 'y' ]
-then
-  echo "Installing Cypress dependencies"
-  sudo apt update
-  sudo apt upgrade
-  sudo apt -y install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-  echo "Installing dbus as service"
-  sudo /etc/init.d/dbus start &> /dev/null
-  echo "Giving sudo rights for current user to start dbus with sudo without passwd"
-  USER_HAS_RIGHT=$(sudo grep -q "$USER" /etc/sudoers.d/dbus)
-  if [ !$USER_HAS_RIGHT ]
-  then
-    echo "$USER ALL = (root) NOPASSWD: /etc/init.d/dbus"  | sudo tee -a /etc/sudoers.d/dbus
-  fi
 fi

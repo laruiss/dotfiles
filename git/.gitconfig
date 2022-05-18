@@ -26,6 +26,7 @@
 	default = simple
 [status]
 	showUntrackedFiles = all
+	short = true
 [diff]
 	wordRegex = .
 	tool = meld
@@ -41,3 +42,7 @@
 [core]
   pager = less -Fr
   
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true

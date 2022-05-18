@@ -139,13 +139,6 @@ alias r="npm run"
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-load_nvm()
-{
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-}
 
 if test -n "${USE_P10K-}"; then
   # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -155,7 +148,6 @@ fi
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 source ~/.zsh/completion/scalingo_complete.zsh
 
-if [ -z "$SSH_AUTH_SOCK" ]; then
    # Check for a currently running instance of the agent
    RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
    echo "RUNNING_AGENT: $RUNNING_AGENT"
@@ -164,9 +156,14 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
         ssh-agent -s &> ~/.ssh/ssh-agent
    fi
    eval `cat ~/.ssh/ssh-agent`
-fi
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/stan/google-cloud-sdk/path.zsh.inc' ]; then . '/home/stan/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/stan/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/stan/google-cloud-sdk/completion.zsh.inc'; fi
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

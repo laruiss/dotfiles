@@ -3,6 +3,7 @@
 read -p "Install Cypress dependencies? [y/N] " CYPRESS_DEPS
 read -p "Install scalingo CLI? [y/N] " SCALINGO
 read -p "Install node? (Skip or type a major version number) " NODE
+read -p "Install Volta? [y/N] " VOLTA
 read -p "Install nvm? [y/N] " NVM
 #read -p "Install brew? [y/N] " BREW
 
@@ -39,6 +40,17 @@ then
   echo "Installing node " $NODE
   wget -qO- https://deb.nodesource.com/setup_${NODE}.x | sudo -E bash -
   sudo apt install -y nodejs
+fi
+
+if [ "$VOLTA" != '' ]
+then
+  echo "Installing Volta "
+  if [ "$BASH_OR_ZSH" != '' ]
+  then
+    source ~/.zshrc
+  else
+    source ~/.bashrc
+  fi
 fi
 
 if [ "$NVM" != '' ]
